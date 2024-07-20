@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Sample extends Model
 {
     protected $fillable = [
-        'average_intensity', 'average_voltage', 'absorbance'
+        'average_intensity', 'average_voltage', 'absorbance', 'concentration'
     ];
 
     protected $table = 'sample';

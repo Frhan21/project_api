@@ -11,7 +11,7 @@ class SampleController extends Controller
     public function index()
     {
         $sample = Sample::all();
-        return response()->json(['status' => 'success', 'data' => $sample]);
+        return response()->json($sample);
     }
 
     public function store(Request $request)
@@ -19,7 +19,8 @@ class SampleController extends Controller
         $this->validate($request, [
             "average_intensity" => "required",
             "average_voltage" => "required",
-            "absorbance" => "required"
+            "absorbance" => "required",
+            'concentration'=>'required'
         ]);
 
         $sample = Sample::create($request->all());
@@ -30,9 +31,9 @@ class SampleController extends Controller
     {
         $sample = Sample::find($request->id);
         if($sample) {
-            return response()->json(['status'=>'success', 'msg'=>'Data has been found', 'data'=>$sample]);
+            return response()->json($sample);
         } else{
-            return response()->json(['status'=>'failed', 'msg'=>'Data not found', 'data'=>[]]);
+            return response()->json([]);
         }
     }
 
@@ -41,9 +42,9 @@ class SampleController extends Controller
         $sample = Sample::find($request->id);
         if($sample) {
             $sample->delete();
-            return response()->json(['status'=>"success", 'message'=>'Data has been delete']);
+            return response()->json(['status'=>'success', 'message'=>'Data berhasil dihapus']);
         } else {
-            return response()->json(['status'=>'failed', 'message'=>'No Data !']);
+            return response()->json(['status'=>'failed', 'message'=>'No Data !'], 400);
         }
     }
 }

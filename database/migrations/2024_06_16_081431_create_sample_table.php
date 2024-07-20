@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('average_intensity');
             $table->string('absorbance');
             $table->string('average_voltage');
+            $table->string('concentration');
             $table->timestamps();
         });
     }
