@@ -1,10 +1,10 @@
 <?php namespace App\Http\Middleware;
 
-    use Closure;
+use Closure;
 
-    class CorsMiddleware
-    {
-     /**
+class CorsMiddleware
+{
+    /**
      * Handle an incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -18,7 +18,8 @@
             'Access-Control-Allow-Methods'     => 'POST, GET, OPTIONS, PUT, DELETE',
             'Access-Control-Allow-Credentials' => 'true',
             'Access-Control-Max-Age'           => '86400',
-            'Access-Control-Allow-Headers'     => 'Content-Type, Authorization, X-Requested-With'
+            'Access-Control-Allow-Headers'     => 'Content-Type, Authorization, X-Requested-With',
+            'Access-Control-Expose-Headers'    => 'X-Total-Count'
         ];
 
         if ($request->isMethod('OPTIONS'))

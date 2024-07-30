@@ -9,9 +9,17 @@ use App\Http\Controllers\Controller;
 
 class SensorController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $sensor = Sensor::all();
+        $sample_id = $request->query('sample_id');
+        // Memeriksa apakah 'sample_id' diberikan
+        if ($sample_id) {
+            // Mendapatkan data sensor yang sesuai dengan sample_id
+            $sensor = Sensor::where('sample_id', $sample_id)->get();
+        } else {
+            // Jika tidak ada sample_id yang diberikan, ambil semua data sensor
+            $sensor = Sensor::all();
+        }
         return response()->json($sensor);
     }
 
@@ -34,12 +42,13 @@ class SensorController extends Controller
         return response()->json(['status' => 'success', 'data' => $sensor], 200);
     }
 
-    public function show(Request $request) {
-        $sensor = Sensor::find($request->id);
-        if($sensor) {
-            return response()->json(['status'=>'Success', 'data'=>$sensor], 200);
+    public function show($id)
+    {
+        $sensor = Sensor::find($id);
+        if ($sensor) {
+            return response()->json(['status' => 'Success', 'data' => $sensor], 200);
         } else {
-            return response()->json(['status'=>"Failed", 'data'=>[]], 400);
+            return response()->json(['status' => "Failed", 'data' => []], 400);
         }
     }
 }

@@ -27,9 +27,9 @@ class SampleController extends Controller
         return response()->json($sample, 200);
     }
 
-    public function show(Request $request)
+    public function show($id)
     {
-        $sample = Sample::find($request->id);
+        $sample = Sample::find($id);
         if($sample) {
             return response()->json($sample);
         } else{
@@ -37,9 +37,9 @@ class SampleController extends Controller
         }
     }
 
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        $sample = Sample::find($request->id);
+        $sample = Sample::find($id);
         if($sample) {
             $sample->delete();
             return response()->json(['status'=>'success', 'message'=>'Data berhasil dihapus']);
@@ -47,4 +47,7 @@ class SampleController extends Controller
             return response()->json(['status'=>'failed', 'message'=>'No Data !'], 400);
         }
     }
+
+
+
 }
